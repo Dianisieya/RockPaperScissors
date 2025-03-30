@@ -1,80 +1,103 @@
 <html>
-    <head>
 
-    </head>
+<head>
+    <title>Rock Paper Scissors</title>
+    <style>
+        button {
+            margin: 10px;
+            padding: 10px;
+        }
+
+        #results,
+        #score {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+    <div id="results"></div>
+    <div id="score"></div>
+
     <script>
-        function getComputerChoice(){
+        function getComputerChoice() {
             const randomNumber = Math.random();
-            if (randomNumber<0.33){
+            if (randomNumber < 0.33) {
                 return "rock";
             } else if (randomNumber < 0.66) {
-            return "paper";
+                return "paper";
             } else {
-            return "scissors";
-            } 
+                return "scissors";
+            }
         }
 
-        function getHumanChoice(){
+        /*function getHumanChoice(){
             const playerChoice = prompt("Choice: Rock / Paper / Scissors").toLowerCase();
             return playerChoice;
-        }
- 
-        
+        }*/
+
+
         function playGame() {
             let humanScore = 0;
             let computerScore = 0;
 
-            function playRound() {
-                const humanChoice = getHumanChoice();
-                console.log(humanChoice);
+            function playRound(humanChoice) {
                 const computerChoice = getComputerChoice();
-                console.log(computerChoice);
+                console.log("Human Choice:", humanChoice);
+                console.log("Computer Choice:", computerChoice);
 
                 switch (humanChoice) {
-                case "rock":
-                    if (computerChoice === "rock") {
-                        console.log('Draw...');
-                    } else if (computerChoice === "paper") {
-                        console.log('You lose! Paper beats Rock')
-                        computerScore++;
-                    } else {
-                        console.log('You win! Rock beats Scissors')
-                        humanScore++;
-                    }
-                    break;
-                case "paper":
-                    if (computerChoice === "paper") {
-                        console.log('Draw...');
-                    } else if (computerChoice === "scissors") {
-                        console.log('You lose! Scissors beats Paper')
-                        computerScore++;
-                    } else {
-                        console.log('You win! Paper beats Rock')
-                        humanScore++;
-                    }
-                    break;
-                case "scissors":
-                    if (computerChoice === "scissors") {
-                        console.log('Draw...');
-                    } else if (computerChoice === "rock") {
-                        console.log('You lose! Rock beats Scissors')
-                        computerScore++;
-                    } else {
-                        console.log('You win! Scissors beats Paper')
-                        humanScore++;
-                    }
-                    break;
-                default:
-                    console.log('Error! Invalid choice');
-             }
+                    case "rock":
+                        if (computerChoice === "rock") {
+                            console.log('Draw...');
+                        } else if (computerChoice === "paper") {
+                            console.log('You lose! Paper beats Rock');
+                            computerScore++;
+                        } else {
+                            console.log('You win! Rock beats Scissors');
+                            humanScore++;
+                        }
+                        break;
+                    case "paper":
+                        if (computerChoice === "paper") {
+                            console.log('Draw...');
+                        } else if (computerChoice === "scissors") {
+                            console.log('You lose! Scissors beats Paper');
+                            computerScore++;
+                        } else {
+                            console.log('You win! Paper beats Rock');
+                            humanScore++;
+                        }
+                        break;
+                    case "scissors":
+                        if (computerChoice === "scissors") {
+                            console.log('Draw...');
+                        } else if (computerChoice === "rock") {
+                            console.log('You lose! Rock beats Scissors');
+                            computerScore++;
+                        } else {
+                            console.log('You win! Scissors beats Paper');
+                            humanScore++;
+                        }
+                        break;
+                    default:
+                        console.log('Error! Invalid choice');
+                }
+
+                document.getElementById("score").innerText = `Human Score: ${humanScore}, Computer Score: ${computerScore}`;
             }
 
-            for (let i = 1; i <= 5; i++) {
-                console.log('Round: '+ i) 
-                playRound();
-                console.log('Human score: ' + humanScore + ' Computer score: ' + computerScore); 
-            }
+
+            document.getElementById("rock").addEventListener("click", () => playRound("rock"));
+            document.getElementById("paper").addEventListener("click", () => playRound("paper"));
+            document.getElementById("scissors").addEventListener("click", () => playRound("scissors"));
         }
+
         playGame();
     </script>
+</body>
+
 </html>
